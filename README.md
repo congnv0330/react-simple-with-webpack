@@ -1,3 +1,11 @@
+## Features
+
+- Webpack 5 
+- Babel
+- Eslint
+- Environment Variables
+- React Refresh
+
 ## Available Scripts
 
 In the project directory, you can run:
