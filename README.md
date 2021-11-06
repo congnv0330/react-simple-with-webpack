@@ -19,7 +19,7 @@ Runs the app in the development mode.
 Builds the app for production to the `dist` folder.
 
 
-### `npm run analyze`
+### `npm run build:report`
 
 Builds the app for production and visualize size of output files.
 
