@@ -140,6 +140,10 @@ module.exports = (env, options) => {
       minimize: isProductionMode,
       minimizer: [new CssMinimizerPlugin(), '...'],
       runtimeChunk: 'multiple'
+    },
+    stats: {
+      assets: false,
+      modules: false
     }
   }
 
