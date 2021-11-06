@@ -13,6 +13,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 // Disable React DevTools in production
 const disableReactDevtools = '<script>if(typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__==="object"){__REACT_DEVTOOLS_GLOBAL_HOOK__.inject=function(){};}</script>'
 
+const appSrc = './src'
+
 module.exports = (env, options) => {
   const isProductionMode = options.mode === 'production'
   const isDevelopmentMode = !isProductionMode
@@ -20,7 +22,7 @@ module.exports = (env, options) => {
   const webpackConfig = {
     devtool: isProductionMode ? false : 'eval-source-map',
     target: ['browserslist'],
-    entry: ['./src/index.jsx'],
+    entry: appSrc + '/index.jsx',
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: isProductionMode
@@ -72,7 +74,7 @@ module.exports = (env, options) => {
       // Resolve in this order
       extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.md'],
       alias: {
-        '@': path.resolve(__dirname, './src')
+        '@': path.resolve(__dirname, appSrc)
       }
     },
     plugins: [
@@ -130,7 +132,7 @@ module.exports = (env, options) => {
       new ESLintPlugin({
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
         eslintPath: require.resolve('eslint'),
-        context: './src'
+        context: appSrc
       })
     ].filter(Boolean),
     optimization: {
