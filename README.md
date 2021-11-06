@@ -12,11 +12,16 @@ In the project directory, you can run:
 
 ### `npm dev`
 
-Runs the app in the development mode.\
+Runs the app in the development mode.
 
 ### `npm run build`
 
-Builds the app for production to the `dist` folder.\
+Builds the app for production to the `dist` folder.
+
+
+### `npm run analyze`
+
+Builds the app for production and visualize size of output files.
 
 ### `npm run lint`
 

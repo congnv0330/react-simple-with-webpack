@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const Dotenv = require('dotenv-webpack')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
@@ -17,6 +17,7 @@ const appSrc = './src'
 
 module.exports = (env, options) => {
   const isProductionMode = options.mode === 'production'
+  const isAnalyzeMode = env.analyze === true && isProductionMode
   const isDevelopmentMode = !isProductionMode
 
   const webpackConfig = {
@@ -126,9 +127,7 @@ module.exports = (env, options) => {
             : {}
         )
       ),
-      // isProductionMode && new BundleAnalyzerPlugin({
-      //   analyzerMode: 'static'
-      // }),
+      isAnalyzeMode && new BundleAnalyzerPlugin(),
       new ESLintPlugin({
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
         eslintPath: require.resolve('eslint'),
