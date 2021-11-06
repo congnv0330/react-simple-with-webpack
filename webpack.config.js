@@ -1,5 +1,4 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -9,6 +8,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const WebpackBar = require('webpackbar')
 
 // Disable React DevTools in production
 const disableReactDevtools = '<script>if(typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__==="object"){__REACT_DEVTOOLS_GLOBAL_HOOK__.inject=function(){};}</script>'
@@ -32,7 +32,8 @@ module.exports = (env, options) => {
         ? 'js/[contenthash:8].chunk.js'
         : 'js/[name].chunk.js',
       assetModuleFilename: 'media/[hash][ext]',
-      publicPath: '/'
+      publicPath: '/',
+      clean: true
     },
     module: {
       rules: [
@@ -79,7 +80,6 @@ module.exports = (env, options) => {
     },
     plugins: [
       new Dotenv(),
-      new CleanWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           {
@@ -133,7 +133,8 @@ module.exports = (env, options) => {
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
         eslintPath: require.resolve('eslint'),
         context: appSrc
-      })
+      }),
+      new WebpackBar()
     ].filter(Boolean),
     optimization: {
       minimize: isProductionMode,
