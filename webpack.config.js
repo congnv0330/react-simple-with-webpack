@@ -142,6 +142,7 @@ module.exports = (env, options) => {
       runtimeChunk: 'multiple'
     },
     stats: {
+      chunks: true,
       assets: false,
       modules: false
     }
