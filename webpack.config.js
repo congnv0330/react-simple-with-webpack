@@ -37,6 +37,7 @@ module.exports = (env, options) => {
       clean: true
     },
     module: {
+      strictExportPresence: true,
       rules: [
         {
           test: /\.(js|jsx)$/,
@@ -138,7 +139,9 @@ module.exports = (env, options) => {
     optimization: {
       minimize: isProductionMode,
       minimizer: [new CssMinimizerPlugin(), '...'],
-      runtimeChunk: 'multiple'
+      splitChunks: {
+        chunks: 'all'
+      }
     },
     stats: {
       chunks: isProductionMode,
@@ -149,9 +152,9 @@ module.exports = (env, options) => {
 
   if (isProductionMode) {
     webpackConfig.performance ={
-      hints: false,
-      maxEntrypointSize: 5242880,
-      maxAssetSize: 5242880,
+      hints: 'warning',
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
     }
   } else {
     webpackConfig.devServer = {
